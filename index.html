@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+      <!-- Meta Tags -->
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      
+      <!-- Main CSS -->
+      <link rel="stylesheet" href="style.css">
+
+      <title>Gere sua Pixel Art</title>
+</head>
+<body>
+
+      <header>
+            <h1>pixelart</h1>
+      </header>
+      
+      <main>
+            <aside>
+                  <span class="option-title">Tamanho:</span>
+                  <input type="number" class="input-size" min="4" value="10" />
+
+                  <span class="option-title">Cor:</span>
+                  <input type="color" class="input-color" />
+
+                  <span class="option-title">Cores usadas:</span>
+                  <section class="used-colors">
+                        <button class="button-color" data-color="red"></button>
+                  </section>
+
+                  <button class="button-save">Baixar Pixelart</button>
+            </aside>
+
+            <section class="canvas">
+                  <div class="row">
+                        <div class="pixel"></div>
+                        <div class="pixel"></div>
+                        <div class="pixel"></div>
+                        <div class="pixel"></div>
+                        <div class="pixel"></div>
+                        <div class="pixel"></div>
+                        <div class="pixel"></div>
+                        <div class="pixel"></div>
+                        <div class="pixel"></div>
+                        <div class="pixel"></div>
+                  </div>
+            </section>
+            <div class="resize"></div>
+      </main>
+
+      <script src="script.js"></script>
+</body>
+</html>
