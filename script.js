@@ -15,12 +15,3 @@ const createElement = (tag, className = "") => {
 const createPixel = () => {
       const pixel = createElement("div", "pixel")
 }
-
-const create = () => {
-      alert('Create')
-}
-
-documento.querySelector('button').onclick = (event) => {
-      event.preventDefault();
-      alert('teste')
-}
