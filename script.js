@@ -2,13 +2,14 @@ const canvas     = document.querySelector(".canvas")
 const inputSize  = document.querySelector(".input-size")
 const inputColor = document.querySelector(".input-color")
 const usedColors = document.querySelector(".used-colors")
-const buttonSave = document.querySelector(".used-colors")
+const buttonSave = document.querySelector(".button-save")
 const colResize  = document.querySelector(".resize")
 const main       = document.querySelector("main")
 
 const MIN_CANVAS_SIZE = 4;
 
 let isPainting = false;
+let isResizing = false;
 
 const createElement = (tag, className = "") => {
       const element = document.createElement(tag);
@@ -39,7 +40,7 @@ const loadCanvas = () => {
           const row = createElement("div", "row");
   
           for (let j = 0; j < length; j += 1) {
-              row.append(createPixel());
+            row.append(createPixel());
           }
   
           canvas.append(row);
@@ -67,8 +68,30 @@ const changeColor = () => {
       if (savedColors.every(check)) {
             usedColors.append(button);
       }
+}
 
-      usedColors.append(button);
+const resizeCanvas = (cursorPositionX) => {
+      if(!isResizing) return;
+
+      const canvasOffset = canvas.getBoundingClientRect().left;
+      const width = `${cursorPositionX - canvasOffset - 20}px`;
+
+      canvas.style.maxWidth = width
+      colResize.style.height = width;
+}
+
+const saveCanvas = () => {
+      html2canvas(canvas, {
+            onrendered: (image) => {
+                  const img  = image.toDataURL("image/png")
+                  const link = createElement("a")
+                  
+                  link.href = img;
+                  link.download = "pixelart.png"
+
+                  link.click();
+            },
+      });
 }
 
 canvas.addEventListener("mousedown", () => (isPainting = true));
@@ -77,4 +100,12 @@ canvas.addEventListener("mouseup", () => (isPainting = false));
 inputSize.addEventListener("change", updateCanvasSize);
 inputColor.addEventListener("change", changeColor);
 
+colResize.addEventListener("mousedown", () => (isResizing = true));
+
+main.addEventListener("mouseup", () => (isResizing = false));
+main.addEventListener("mousemove", ({ clientX }) => resizeCanvas(clientX));
+
+buttonSave.addEventListener("click", saveCanvas)
+
 loadCanvas();
+ 
